@@ -1,0 +1,9 @@
+{
+  "name": "app-requirements",
+  "version": "0.1.0",
+  "description": "App requirements",
+  "main": "index.js",
+  "dependencies": {
+    "surge": "0.21.6"
+    }
+}    

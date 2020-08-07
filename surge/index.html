@@ -1,0 +1,84 @@
+{%extends "base.html"%} {%block title%}Home{%endblock%}
+{%block body%}
+<div class="jumbotron">
+  <img src=https://curtana.surge.sh/logo.png height='225'>
+  <hr>
+  <p class="lead">
+  This website automatically updates when something new is released for the Redmi Note 9S aka curtana, last updated: {{today}}.
+  <br>
+  </p>
+  <p></p>
+  <p class="lead">
+  Just click on a rom/kernel/recovery to get its download link and changelog!
+  </p>
+  <p></p>
+  <p class="lead">
+	List of all custom roms:
+	<br>
+    <ul>
+      {% for char in roms %}
+      <li><a href='/{{char}}'>{{char}}</a></li>
+      {% endfor %}
+    </ul>
+  </p>
+  <p class="lead">
+	List of all custom kernels:
+        <br>
+    <ul>
+      {% for char in kernels %}
+      <li><a href='/{{char}}'>{{char}}</a></li>
+      {% endfor %}
+    </ul>
+  </p>
+  <p class="lead">
+	List of all custom recoveries:
+        <br>
+    <ul>
+      {% for char in recoveries %}
+      <li><a href='/{{char}}'>{{char}}</a></li>
+      {% endfor %}
+    </ul>
+  </p>
+  <hr class="hr" />
+  <h1 class="display-4">Checkout the latest releases</h1>
+  <p></p>
+  <div id="carouselLatestReleases" class="carousel slide" data-ride="carousel">
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="card">
+          <img class="card-img-top" src="https://curtana.surge.sh/{{latest[0]}}/thumbnail.png" alt="The lastest rom">
+          <div class="card-body">
+            <h5 class="card-title lead">Latest rom: <span class="redify">{{latest[0]}}</span></h5>
+            <p class="card-text lead">Last updated: {{today}}</p>
+            <a href="/{{latest[0]}}" class="btn btn-primary">Show more</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card">
+          <img class="card-img-top" src="https://curtana.surge.sh/{{latest[1]}}/thumbnail.png" alt="The lastest kernel">
+          <div class="card-body">
+            <h5 class="card-title lead">Latest kernel: <span class="redify">{{latest[1]}}</span></h5>
+            <p class="card-text lead">Last checked: {{today}}</p>
+            <a href="/{{latest[1]}}" class="btn btn-primary">Show more</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card">
+          <img class="card-img-top" src="https://curtana.surge.sh/{{latest[2]}}/thumbnail.png" alt="The lastest recovery">
+          <div class="card-body">
+            <h5 class="card-title lead">Latest recovery: <span class="redify">{{latest[2]}}</span></h5>
+            <p class="card-text lead">Last checked: {{today}}</p>
+            <a href="/{{latest[2]}}" class="btn btn-primary">Show more</a>
+          </div>
+        </div>
+      </div>
+  <hr class="hr" />
+  <p class="lead">
+  Developed by Priyam Kalra // Find me at <a href="t.me/justaprudev">Telgram</a> | <a href="https://twitter.com/justaprudev">Twitter</a> | <a href="https://github.com/justaprudev">Github</a><br>
+  Source code: Click <a href=https://github.com/PriyamKalra/curtana>here</a>
+  </p>
+</div>
+{%endblock%}
