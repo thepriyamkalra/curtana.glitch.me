@@ -1,3 +1,4 @@
 telethon==1.14.0
 markdown
+numpy
 jinja2

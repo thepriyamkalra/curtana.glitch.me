@@ -6,10 +6,10 @@ from datetime import date
 from time import sleep
 from production import Config
 from markdown import markdown
+from numpy.random import choice
 from subprocess import check_output
 from os import rename, listdir, remove, path
 from jinja2 import Environment, FileSystemLoader
-
 
 # Event handler
 async def handler(event):
@@ -39,7 +39,7 @@ async def handler(event):
     parsed_data = parse_data(data)
     parse_template(title="404.html")
     parse_template(title="index.html", roms=sorted(parsed_data[0]), kernels=sorted(parsed_data[1]), recoveries=sorted(
-        parsed_data[2]), latest=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], today=today)
+        parsed_data[2]), latest=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_color=random_color, choice=choice)
     log("Update completed.")
     to_backup = {"surge/base.html": "base.html",
                  "surge/template.html": "template.html"}
@@ -57,7 +57,8 @@ async def handler(event):
 
 # Helpers
 def parse_text(text):
-    changes = {"**": "", "__": "", "~~": "", "`": "", "▪️": "• ", "\n": "\n<br>"}
+    changes = {"**": "", "__": "", "~~": "",
+               "`": "", "▪️": "• ", "\n": "\n<br>"}
     terms = text.split()
     for term in terms:
         if term.startswith("@"):
@@ -97,6 +98,13 @@ def parse_template(title, **kwargs):
     static_template = template_object.render(**kwargs)
     with open(path, "w") as f:
         f.write(static_template)
+
+
+def random_color():
+    rgb = tuple(choice(range(256), size=3))
+    while rgb < (125, 125, 125):
+        rgb = tuple(choice(range(256), size=3))
+    return rgb
 
 
 def log(text):

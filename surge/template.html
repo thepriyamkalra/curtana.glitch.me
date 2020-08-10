@@ -1,13 +1,16 @@
-{%extends "base.html"%} {%block title%}{{title}}{%endblock%}
+{%extends "base.html"%}
+{%block title%}Home{%endblock%}
 {%block body%}
-<div class='jumbotron'><img src=https://curtana.surge.sh/{{title}}/thumbnail.png height='225'>
-<div class='display-4'>
-<hr>
+<div class="content" style="width: auto; left:auto; position:relative">
+<p />
+<img src="https://curtana.surge.sh/{{title}}/thumbnail.png" height="255">
+<p />
+<h1 class="redify">
 #{{title}}
-</div>
+</h2>
 </p>
-<div class='lead'>
+<div style="font-size:larger">
 {{text}}
-<hr>
+</div>
 </div>
 {%endblock%}
