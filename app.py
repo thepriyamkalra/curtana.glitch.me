@@ -41,18 +41,13 @@ async def handler(event):
     parse_template(title="index.html", roms=sorted(parsed_data[0]), kernels=sorted(parsed_data[1]), recoveries=sorted(
         parsed_data[2]), latest=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_color=random_color, choice=choice)
     log("Update completed.")
-    to_backup = {"surge/base.html": "base.html",
-                 "surge/template.html": "template.html"}
-    rename_files(to_backup)
     deploy()
     log("Cleaning up leftover files..")
     for f in listdir("surge"):
         if path.isdir(f"surge/{f}"):
             rmtree(f"surge/{f}")
     remove("surge/index.html")
-    to_restore = {"base.html": "surge/base.html",
-                  "template.html": "surge/template.html", "index.bak": "surge/index.html"}
-    rename_files(to_restore)
+    rename("index.bak", "surge/index.html")
     log(["Cleaned up all leftover files.", "All jobs executed, idling.."])
 
 # Helpers
@@ -113,11 +108,6 @@ def log(text):
     for item in text:
         logger.info(item)
         sleep(1)
-
-
-def rename_files(file_dict):
-    for src, dst in file_dict.items():
-        rename(src, dst)
 
 
 def deploy():

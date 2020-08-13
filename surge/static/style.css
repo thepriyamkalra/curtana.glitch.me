@@ -16,6 +16,7 @@ a {
   color: #4285f4;
 }
 
+
 p {
   font-family: Product Sans;
 }
@@ -44,10 +45,11 @@ li:before {
   text-align: center;
 }
 
-.list {
+.content ul {
   font-size: 27px;
   text-align: left;
 }
+
 
 .font {
   font-family: Product Sans;
@@ -64,3 +66,32 @@ li:before {
 .greenify {
   color: #34a853 !important;
 }
+
+@media screen and (max-width:1080px) and (max-height:2400px) {
+	.content {
+		font-family: Product Sans;
+		background-color: #121212;
+		color: white;
+		border-radius: 10px;
+		padding: 2%;
+		width: auto;
+		position: sticky;
+		text-align: center;
+	}
+
+	.list {
+		width: 
+		font-size: 27px;
+		text-align: center;
+		padding-left: 0;
+	}
+
+	.list a {
+		font-size: 140%;
+	}
+	
+	p {
+		font-family: Product Sans;
+		font-size: 125%;
+	}
+} 

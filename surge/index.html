@@ -1,17 +1,30 @@
+<!-- This is an automatically generated page -->
+
 {%extends "base.html"%}
 {%block title%}Home{%endblock%}
 {%block body%}
+
 <center>
-  <img src="logo.png" alt="Curtana Updates" height="255" />
+  <img src="static/logo.png" alt="Curtana Updates" height="255" />
   <p />
   <h1 class="font">
-    <a href="https://curtana.surge.sh/"><span class="font redify">curtana</span></a><span class="font" style="color: white;">.</span><a href="https://surge.sh/"><span class="font greenify">surge<span class="font" style="color: white;">.</span>sh</span></a>
+    <a href="https://curtana.surge.sh/"
+      ><span class="font redify">curtana</span></a
+    ><span class="font" style="color: white;">.</span
+    ><a href="https://surge.sh/"
+      ><span class="font greenify"
+        >surge<span class="font" style="color: white;">.</span>sh</span
+      ></a
+    >
   </h1>
   <h2 class="font">
     All your favourite custom firmware in one place.
   </h2>
   <h3 class="font">
-    developed by <a href="https://justaprudev.github.io"><span class="font redify">Priyam Kalra</span></a>
+    Developed & Maintained by
+    <a href="https://justaprudev.github.io"
+      ><span class="font redify">Priyam Kalra</span></a
+    >
   </h3>
 </center>
 <hr />
@@ -19,22 +32,20 @@
 <div class="content" style="left: 11%;">
   <br />
   <h1 class="font redify">ROMs</h1>
-  <ul class="lead list">
-    {% for char in roms %}
-    {% if char == latest[0] %}
+  <ul class="lead">
+    {% for char in roms %} {% if char == latest[0] %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}} (latest)</span>
-	  </a>
+        <span style="color: white;">{{char}} (latest)</span>
+      </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}}</span>
-	  </a>
+        <span style="color: white;">{{char}}</span>
+      </a>
     </li>
-    {% endif %}
-    {% endfor %}
+    {% endif %} {% endfor %}
   </ul>
   <br />
 </div>
@@ -42,22 +53,20 @@
 <div class="content" style="left: 39%;">
   <br />
   <h1 class="font redify">Kernels</h1>
-  <ul class="lead list">
-    {% for char in kernels %}
-    {% if char == latest[1] %}
+  <ul class="lead">
+    {% for char in kernels %} {% if char == latest[1] %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}} (latest)</span>
-	  </a>
+        <span style="color: white;">{{char}} (latest)</span>
+      </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}}</span>
-	  </a>
+        <span style="color: white;">{{char}}</span>
+      </a>
     </li>
-    {% endif %}
-	{% endfor %}
+    {% endif %} {% endfor %}
   </ul>
   <br />
 </div>
@@ -65,22 +74,20 @@
 <div class="content" style="left: 67%;">
   <br />
   <h1 class="font redify">Recoveries</h1>
-  <ul class="lead list">
-    {% for char in recoveries %}
-    {% if char == latest[2] %}
+  <ul class="lead">
+    {% for char in recoveries %} {% if char == latest[2] %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}} (latest)</span>
-	  </a>
+        <span style="color: white;">{{char}} (latest)</span>
+      </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
       <a href="/{{char}}">
-		<span style="color: white;">{{char}}</span>
-	  </a>
+        <span style="color: white;">{{char}}</span>
+      </a>
     </li>
-    {% endif %}
-	{% endfor %}
+    {% endif %} {% endfor %}
   </ul>
   <br />
 </div>
