@@ -30,13 +30,13 @@
   <h1 class="font redify">ROMs [{{count[0]}}]</h1>
   <ul class="lead">
     {% for char in roms %} {% if char == latest[0] %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>
@@ -51,13 +51,13 @@
   <h1 class="font redify">Kernels [{{count[1]}}]</h1>
   <ul class="lead">
     {% for char in kernels %} {% if char == latest[1] %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>
@@ -72,13 +72,13 @@
   <h1 class="font redify">Recoveries  [{{count[2]}}]</h1>
   <ul class="lead">
     {% for char in recoveries %} {% if char == latest[2] %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
-    <li style="color: rgb{{random_color()}}">
+    <li style="color: {{random_pastel()}}">
       <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>

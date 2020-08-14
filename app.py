@@ -2,10 +2,10 @@
 # By Priyam Kalra
 
 from time import sleep
+from random import choice
 from shutil import rmtree
 from markdown import markdown
 from production import Config
-from numpy.random import choice
 from datetime import date as Date
 from subprocess import check_output
 from os import rename, listdir, remove, path
@@ -44,7 +44,7 @@ async def handler(event):
     parsed_data = parse_data(data)
     parse_template(title="404.html")
     parse_template(title="index.html", roms=sorted(parsed_data[0][1:]), kernels=sorted(parsed_data[1][1:]), recoveries=sorted(
-        parsed_data[2][1:]), latest=[parsed_data[0][1], parsed_data[1][1], parsed_data[2][1]], count=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_color=random_color, choice=choice, date=date)
+        parsed_data[2][1:]), latest=[parsed_data[0][1], parsed_data[1][1], parsed_data[2][1]], count=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_pastel=random_pastel, choice=choice, date=date)
     log("Update completed.")
     deploy()
     log("Cleaning up leftover files..")
@@ -106,11 +106,8 @@ def parse_template(title, **kwargs):
         f.write(static_template)
 
 
-def random_color():
-    rgb = tuple(choice(range(256), size=3))
-    while rgb < (125, 125, 125):
-        rgb = tuple(choice(range(256), size=3))
-    return rgb
+def random_pastel():
+    return f"hsl({choice(range(359))}, 100%, 75%)"
 
 
 def log(text):
