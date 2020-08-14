@@ -45,7 +45,8 @@ async def handler(event):
     log("Cleaning up leftover files..")
     for f in listdir("surge"):
         if path.isdir(f"surge/{f}"):
-            rmtree(f"surge/{f}")
+            if f != "static":
+                rmtree(f"surge/{f}")
     remove("surge/index.html")
     rename("index.bak", "surge/index.html")
     log(["Cleaned up all leftover files.", "All jobs executed, idling.."])
