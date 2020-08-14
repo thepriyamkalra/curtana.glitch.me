@@ -1,12 +1,12 @@
 # For curtana.surge.sh
 # By Priyam Kalra
 
-from shutil import rmtree
-from datetime import date
 from time import sleep
-from production import Config
+from shutil import rmtree
 from markdown import markdown
+from production import Config
 from numpy.random import choice
+from datetime import date as Date
 from subprocess import check_output
 from os import rename, listdir, remove, path
 from jinja2 import Environment, FileSystemLoader
@@ -15,15 +15,15 @@ from jinja2 import Environment, FileSystemLoader
 async def handler(event):
     data = {}
     messages = []
-    today = date.today().strftime("%B %d, %Y")
+    date = Date.today().strftime("%B %d, %Y")
     chats = Config.CHATS
-    log([today + " -- its update day!", "Updates chat(s): " + str(chats)])
+    log([date + " -- its update day!", "Updates chat(s): " + str(chats)])
     for chat in chats:
         async for message in client.iter_messages(chat):
             messages.append(message)
     for message in messages:
         text = message.text if message.text is not None else ""
-        if (True if "#ROM" in text else (True if "#Port" in text else (True if "#Kernel" in text else (True if "#Recovery" in text else False)))):
+        if (True if "#Curtana" in text else(True if "#curtana" in text else False)):
             title = f"{text.split()[0][1:]}"
             if title not in Config.BLOCKED_UPDATES:
                 with open("surge/index.html", "r") as index:
@@ -32,14 +32,19 @@ async def handler(event):
                 if title.lower() not in str(data.keys()).lower():
                     data.update({title: text})
                     image = await client.download_media(message, f"surge/{title}/")
-                    thumbnail = f"surge/{title}/thumbnail.png"
-                    rename(image, thumbnail)
+                    if image.endswith((".png", ".jpg", ".jpeg")):
+                        logo = f"surge/{title}/logo.png"
+                        logo_html = f"<img src='https://curtana.surge.sh/{title}/logo.png' height='255'>"
+                    elif image.endswith((".mp4", ".gif")):
+                        logo = f"surge/{title}/logo.mp4"
+                        logo_html = f"<div class='rounded-video'><video height=255 autoplay loop muted playsinline><source src='https://curtana.surge.sh/{title}/logo.mp4' type='video/mp4'></video></div>"
+                    rename(image, logo)
                     parse_template(title=title, text=parse_text(
-                        data[title][len(title)+1:]))
+                        data[title][len(title)+1:]), logo=logo_html)
     parsed_data = parse_data(data)
     parse_template(title="404.html")
-    parse_template(title="index.html", roms=sorted(parsed_data[0]), kernels=sorted(parsed_data[1]), recoveries=sorted(
-        parsed_data[2]), latest=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_color=random_color, choice=choice)
+    parse_template(title="index.html", roms=sorted(parsed_data[0][1:]), kernels=sorted(parsed_data[1][1:]), recoveries=sorted(
+        parsed_data[2][1:]), latest=[parsed_data[0][1], parsed_data[1][1], parsed_data[2][1]], count=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], random_color=random_color, choice=choice, date=date)
     log("Update completed.")
     deploy()
     log("Cleaning up leftover files..")
@@ -66,18 +71,23 @@ def parse_text(text):
 
 
 def parse_data(data):
-    roms = []
-    kernels = []
-    recoveries = []
+    roms = [0]
+    kernels = [0]
+    recoveries = [0]
     for title, value in data.items():
-        if "#ROM" in value:
+        value = value.lower()
+        if "#rom" in value:
             roms.append(title)
-        if "#Port" in value:
+            roms[0] += 1
+        elif "#port" in value:
             roms.append(title)
-        if "#Kernel" in value:
+            roms[0] += 1
+        elif "#kernel" in value:
             kernels.append(title)
-        if "#Recovery" in value:
+            kernels[0] += 1
+        elif "#recovery" in value:
             recoveries.append(title)
+            recoveries[0] += 1
     return [roms, kernels, recoveries]
 
 

@@ -22,7 +22,7 @@ p {
 }
 
 img {
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 li {
@@ -31,6 +31,14 @@ li {
 
 li:before {
   content: "• ";
+}
+
+.rounded-video{
+	width: 450px;
+	height: 255px;
+	margin: auto;
+    border-radius: 10px; 
+    overflow: hidden; 
 }
 
 .content {
@@ -78,7 +86,11 @@ li:before {
 		position: sticky;
 		text-align: center;
 	}
-
+	
+	.--check-bg {
+		background-color: rgba(0, 0, 0, 0) !important;
+	}
+	
 	.list {
 		width: 
 		font-size: 27px;

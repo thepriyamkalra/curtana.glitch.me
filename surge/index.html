@@ -5,43 +5,39 @@
 {%block body%}
 
 <center>
-  <img src="static/logo.png" alt="Curtana Updates" height="255" />
+  <img src="https://curtana.surge.sh/static/logo.png" alt="Curtana Updates" height="255" />
   <p />
   <h1 class="font">
-    <a href="https://curtana.surge.sh/"
-      ><span class="font redify">curtana</span></a
-    ><span class="font" style="color: white;">.</span
-    ><a href="https://surge.sh/"
-      ><span class="font greenify"
-        >surge<span class="font" style="color: white;">.</span>sh</span
-      ></a
-    >
+    <a href="https://curtana.surge.sh/"><span class="font redify">curtana</span></a><span class="font" style="color: white;">.</span><a href="https://surge.sh/"><span class="font greenify">surge<span class="font" style="color: white;">.</span>sh</span></a>
   </h1>
   <h2 class="font">
     All your favourite custom firmware in one place.
   </h2>
   <h3 class="font">
     Developed & Maintained by
-    <a href="https://justaprudev.github.io"
-      ><span class="font redify">Priyam Kalra</span></a
-    >
+    <a href="https://justaprudev.github.io">
+		<span class="font redify">Priyam Kalra</span>
+	</a>
   </h3>
+  <h4 class="font">
+    Last updated: {{date}}
+  </h4>
 </center>
 <hr />
 
 <div class="content" style="left: 11%;">
   <br />
-  <h1 class="font redify">ROMs</h1>
+  <h1 class="font redify">ROMs [{{count[0]}}]</h1>
   <ul class="lead">
     {% for char in roms %} {% if char == latest[0] %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>
     </li>
@@ -52,17 +48,17 @@
 
 <div class="content" style="left: 39%;">
   <br />
-  <h1 class="font redify">Kernels</h1>
+  <h1 class="font redify">Kernels [{{count[1]}}]</h1>
   <ul class="lead">
     {% for char in kernels %} {% if char == latest[1] %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>
     </li>
@@ -73,17 +69,17 @@
 
 <div class="content" style="left: 67%;">
   <br />
-  <h1 class="font redify">Recoveries</h1>
+  <h1 class="font redify">Recoveries  [{{count[2]}}]</h1>
   <ul class="lead">
     {% for char in recoveries %} {% if char == latest[2] %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}} (latest)</span>
       </a>
     </li>
     {% else %}
     <li style="color: rgb{{random_color()}}">
-      <a href="/{{char}}">
+      <a href="https://curtana.surge.sh/{{char}}">
         <span style="color: white;">{{char}}</span>
       </a>
     </li>
