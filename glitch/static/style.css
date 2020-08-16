@@ -30,15 +30,15 @@ li {
 }
 
 li:before {
-  content: "• ";
+  content: "*  ";
 }
 
 .rounded-video{
 	width: 450px;
 	height: 255px;
 	margin: auto;
-    border-radius: 10px; 
-    overflow: hidden; 
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 .content {
