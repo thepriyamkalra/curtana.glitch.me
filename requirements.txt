@@ -1,0 +1,4 @@
+telethon==1.14.0
+markdown
+jinja2
+pygit

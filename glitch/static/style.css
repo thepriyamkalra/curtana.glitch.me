@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Product Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"),
+    url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2)
+      format("woff2");
+}
+
+body {
+  background-color: black !important;
+  padding: 50px;
+}
+
+a {
+  color: #4285f4;
+}
+
+
+p {
+  font-family: Product Sans;
+}
+
+img {
+  border-radius: 10px;
+}
+
+li {
+  list-style-type: none;
+}
+
+li:before {
+  content: "• ";
+}
+
+.rounded-video{
+	width: 450px;
+	height: 255px;
+	margin: auto;
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.content {
+  font-family: Product Sans;
+  background-color: #121212;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 25%;
+  left: 39%;
+  position: absolute;
+  text-align: center;
+}
+
+.content ul {
+  font-size: 27px;
+  text-align: left;
+}
+
+
+.font {
+  font-family: Product Sans;
+}
+
+.redify {
+  color: #ea4335 !important;
+}
+
+.pixify {
+  color: #4285f4 !important;
+}
+
+.greenify {
+  color: #34a853 !important;
+}
+
+@media screen and (max-width:1080px) and (max-height:2400px) {
+	.content {
+		font-family: Product Sans;
+		background-color: #121212;
+		color: white;
+		border-radius: 10px;
+		padding: 2%;
+		width: auto;
+		position: sticky;
+		text-align: center;
+	}
+	
+	.--check-bg {
+		background-color: rgba(0, 0, 0, 0) !important;
+	}
+	
+	.list {
+		width: 
+		font-size: 27px;
+		text-align: center;
+		padding-left: 0;
+	}
+
+	.list a {
+		font-size: 140%;
+	}
+	
+	p {
+		font-family: Product Sans;
+		font-size: 125%;
+	}
+} 
