@@ -11,7 +11,7 @@ from subprocess import run, DEVNULL
 from os import rename, listdir, remove, path
 from jinja2 import Environment, FileSystemLoader
 
-# Event handler
+# Event handler 
 async def handler(event):
     data = {}
     messages = []
@@ -59,7 +59,7 @@ async def handler(event):
 # Helpers
 def parse_text(text):
     changes = {"**": "", "__": "", "~~": "",
-               "`": "", "▪️": "• ", "\n": "\n<br>"}
+               "`": "", "▪️": "* ", "\n": "\n<br>"}
     terms = text.split()
     for term in terms:
         if term.startswith("@"):
@@ -120,7 +120,7 @@ def log(text):
 
 def deploy():
     log(f"Deploying {Config.GLITCH_APP}.glitch.me..")
-    cmd = f"git config --global user.email 'deploys@{Config.GLITCH_APP}.glitch.me' && git config --global user.name '{Config.GLITCH_APP}' && git clone {Config.GLITCH_GIT_URL} && cd {Config.GLITCH_APP} && git reset HEAD~1 --hard && cp -r ../glitch/* ./ && rm base.html && rm template.html && git add . && git commit -am 'Automatic deploy' && git push --force"
+    cmd = f"git config --global user.email 'none    ' && git config --global user.name 'Glitch ({Config.GLITCH_APP})' && git clone {Config.GLITCH_GIT_URL} && cd {Config.GLITCH_APP} && git reset HEAD~1 --hard && cp -r ../glitch/* ./ && rm base.html && rm template.html && git add . && git commit -am 'Automatic deploy' && git push --force"
     with open("output.log", "w") as out:
         run(cmd, stderr=out, stdout=out, shell=True)
     with open("output.log", "r") as out:
@@ -141,6 +141,8 @@ async def authorize(event):
     return False
 
 # Event Dispatchers
+
+
 @client.on(register(outgoing=True, func=authorize))
 async def manual(event):
     log("Starting jobs for manual update.")

@@ -4,16 +4,20 @@
 {%block title%}{{title}}{%endblock%}
 {%block body%}
 
-<div class="content --check-bg" style="width: auto; left:auto; position:relative;">
-<p></p>
-{{logo}}
-<p></p>
-<h1 class="redify">
-#{{title}}
-</h2>
-</p>
-<div style="font-size:larger">
-{{text}}
+<div class="container">
+    <p></p>
+    <center>{{logo}}
+        <div>
+            <br><br>
+            <h1 class="red">
+                #{{title}}
+            </h1>
+            </p>
+            <div style="font-size:larger">
+                {{text}}
+            </div>
+        </div>
+    </center>
 </div>
-</div>
+
 {%endblock%}
