@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://curtana.glitch.me/static/favicon/mstile-150x150.png"/>
+            <TileColor>#ea4335</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
