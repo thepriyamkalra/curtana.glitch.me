@@ -14,11 +14,6 @@ body {
 }
 
 
-img {
-    border-radius: 20px;
-}
-
-
 .container {
     font-family: Product Sans;
     display: flex;

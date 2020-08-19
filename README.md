@@ -1,6 +1,5 @@
 # curtana.glitch.me
 ![LOGO](https://curtana.glitch.me/static/logo.png)
-* curtana.glitch.me automatically tracks community firmware development for the Redmi Note 9S, codename: curtana. 
 
 ## Credits
 * [Telethon](https://github.com/LonamiWebs/Telethon) (The telegram client)
