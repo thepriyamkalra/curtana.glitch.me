@@ -10,12 +10,13 @@
 
 body {
     background-color: black !important;
+    font-family: Product Sans !important;
+    color: white !important;
     padding: 50px;
 }
 
 
 .container {
-    font-family: Product Sans;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -35,11 +36,12 @@ body {
 
 .container li {
     list-style-type: none;
+    font-size: 140%;
 }
 
 
 .container li:before {
-    content: "*  ";
+    content: ">  ";
 }
 
 
@@ -66,7 +68,6 @@ body {
     border-radius: 10px; 
     overflow: hidden; 
 }
-
 
 
 .red {
