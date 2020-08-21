@@ -29,14 +29,13 @@
 <hr style="background: #181a1b">
 
 <div class="background-card">
-  <br><br><br>
   <div class="container">
     <div>
-      <br />
-      <center>
-        <h1 class="red">ROMs [{{count[0]}}]</h1>
-        <p></p>
-      </center>
+      <div style="margin-left: 16%;">
+        <span class="red" style="font-size: 135%;">[{{count[0]}}]</span>
+        <h1>ROMs</h1>
+      </div>
+      <p></p>
       <ul class="lead">
         {% for char in roms %} {% if char == latest[0] %}
         <li style="color: {{random_pastel()}}">
@@ -52,15 +51,14 @@
         </li>
         {% endif %} {% endfor %}
       </ul>
-      <br />
     </div>
-
+    <div style="margin-left: 0%;"></div>
     <div>
-      <br />
-      <center>
-        <h1 class="red">Kernels [{{count[1]}}]</h1>
-        <p></p>
-      </center>
+      <div style="margin-left: 18%;">
+        <span class="red" style="font-size: 135%;">[{{count[1]}}]</span>
+        <h1>Kernels</h1>
+      </div>
+      <p></p>
       <ul class="lead">
         {% for char in kernels %} {% if char == latest[1] %}
         <li style="color: {{random_pastel()}}">
@@ -76,15 +74,14 @@
         </li>
         {% endif %} {% endfor %}
       </ul>
-      <br />
     </div>
-
+    <div style="margin-left: 1.9%;"></div>
     <div>
-      <br />
-      <center>
-        <h1 class="red">Recoveries [{{count[2]}}]</h1>
-        <p></p>
-      </center>
+      <div style="margin-left: 18%;">
+        <span class="red" style="font-size: 135%;">[{{count[2]}}]</span>
+        <h1>Recoveries</h1>
+      </div>
+      <p></p>
       <ul class="lead">
         {% for char in recoveries %} {% if char == latest[2] %}
         <li style="color: {{random_pastel()}}">
@@ -100,10 +97,8 @@
         </li>
         {% endif %} {% endfor %}
       </ul>
-      <br />
     </div>
   </div>
-  <br><br><br>
 </div>
 
 {%endblock%}

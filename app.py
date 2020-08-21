@@ -6,18 +6,41 @@ from random import choice
 from shutil import rmtree
 from markdown import markdown
 from production import Config
-from datetime import date as Date
+from datetime import date as datetime
 from subprocess import run, DEVNULL
 from os import rename, listdir, remove, path
 from jinja2 import Environment, FileSystemLoader
 
-# Event handler 
+
+# Checks chat username
+async def chat(e):
+    chat = await e.get_chat()
+    if f"@{chat.username}" in Config.CHATS:
+        return True
+    return False
+
+
+# Event Dispatchers
+@client.on(register(outgoing=True, func=chat))
+async def manual(event):
+    log("Starting jobs for manual update.")
+    await handler(event)
+
+
+@client.on(register(incoming=True, func=chat))
+async def automatic(event):
+    log("Starting jobs for automatic update.")
+    await handler(event)
+
+
+# Event handler
 async def handler(event):
     data = {}
     messages = []
-    date = Date.today().strftime("%B %d, %Y")
+    date = datetime.today().strftime("%B %d, %Y")
     chats = Config.CHATS
-    log([date + " -- its update day!", "Updates chat(s): " + str(chats)])
+    log([date + " -- its update day!", "Updates chat(s): " +
+         str(chats), "Event chat: " + f"@{event.sender.username}"])
     for chat in chats:
         async for message in client.iter_messages(chat):
             messages.append(message)
@@ -37,7 +60,7 @@ async def handler(event):
                         logo_html = f"<img src='https://curtana.glitch.me/{title}/logo.png' height='255'>"
                     elif media.endswith((".mp4")):
                         logo = f"glitch/{title}/logo.mp4"
-                        logo_html = f"<div class='rounded-video'><video height=255 autoplay loop muted playsinline><source src='https://curtana.glitch.me/{title}/logo.mp4' type='video/mp4'></video></div>"
+                        logo_html = f"<video style='border-radius: 10px;' height=255 autoplay loop muted playsinline><source src='https://curtana.glitch.me/{title}/logo.mp4' type='video/mp4'></video>"
                     rename(media, logo)
                     parse_template(title=title, text=parse_text(
                         data[title][len(title)+1:]), logo=logo_html)
@@ -56,10 +79,11 @@ async def handler(event):
     rename("index.bak", "glitch/index.html")
     log(["Cleaned up all leftover files.", "All jobs executed, idling.."])
 
+
 # Helpers
 def parse_text(text):
-    changes = {"**": "", "__": "", "~~": "",
-               "`": "", "▪️": "* ", "\n": "\n<br>"}
+    changes = {"**": "", "__": "", "~~": "",  "`": "",
+               "▪️": "> ", "•": ">", "\n": "\n<br>"}
     terms = text.split()
     for term in terms:
         if term.startswith("@"):
@@ -106,10 +130,6 @@ def parse_template(title, **kwargs):
         f.write(static_template)
 
 
-def random_pastel():
-    return f"hsl({choice(range(359))}, 100%, 75%)"
-
-
 def log(text):
     if type(text) is not list:
         text = [text]
@@ -118,9 +138,13 @@ def log(text):
         sleep(1)
 
 
+def random_pastel():
+    return f"hsl({choice(range(359))}, 100%, 75%)"
+
+
 def deploy():
     log(f"Deploying {Config.GLITCH_APP}.glitch.me..")
-    cmd = f"git config --global user.email 'none    ' && git config --global user.name 'Glitch ({Config.GLITCH_APP})' && git clone {Config.GLITCH_GIT_URL} && cd {Config.GLITCH_APP} && git reset HEAD~1 --hard && cp -r ../glitch/* ./ && rm base.html && rm template.html && git add . && git commit -am 'Automatic deploy' && git push --force"
+    cmd = f"git config --global user.email 'none' && git config --global user.name 'Glitch ({Config.GLITCH_APP})' && git clone {Config.GLITCH_GIT_URL} && cd {Config.GLITCH_APP} && git reset HEAD~1 --hard && cp -r ../glitch/* ./ && rm base.html && rm template.html && git add . && git commit -am 'Automatic deploy' && git push --force"
     with open("output.log", "w") as out:
         run(cmd, stderr=out, stdout=out, shell=True)
     with open("output.log", "r") as out:
@@ -130,26 +154,3 @@ def deploy():
     else:
         log("Error while deploying:\n" + str(output))
     remove("output.log")
-
-
-async def authorize(event):
-    chat = await event.get_chat()
-    tag = f"@{chat.username}"
-    if tag in Config.CHATS:
-        log(f"Authorized chat: {tag}")
-        return True
-    return False
-
-# Event Dispatchers
-
-
-@client.on(register(outgoing=True, func=authorize))
-async def manual(event):
-    log("Starting jobs for manual update.")
-    await handler(event)
-
-
-@client.on(register(incoming=True, func=authorize))
-async def automatic(event):
-    log("Starting jobs for automatic update.")
-    await handler(event)

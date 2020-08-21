@@ -19,6 +19,7 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
+    padding-top: 10px;
     justify-content: center;
 }
 
@@ -29,8 +30,7 @@ body {
 
 
 .container div {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 5%;
 }
 
 
@@ -50,23 +50,10 @@ body {
 }
 
 
-.container h1 {
-    display: contents;
-}
-
-
 .background-card {
     background-color: #121212;
     border-radius: 10px;
-}
-
-
-.rounded-video {
-    width: 450px;
-    height: 255px;
-    margin: auto;
-    border-radius: 10px; 
-    overflow: hidden; 
+    margin-right: 0%;
 }
 
 
