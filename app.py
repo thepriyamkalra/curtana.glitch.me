@@ -46,7 +46,7 @@ async def handler(event):
             messages.append(message)
     for message in messages:
         text = message.text if message.text is not None else ""
-        if (True if "#Curtana" in text else(True if "#curtana" in text else False)):
+        if is_valid(text):
             title = f"{text.split()[0][1:]}"
             if title not in Config.BLOCKED_UPDATES:
                 with open("glitch/index.html", "r") as index:
@@ -128,6 +128,13 @@ def parse_template(title, **kwargs):
     static_template = template_object.render(**kwargs)
     with open(path, "w") as f:
         f.write(static_template)
+
+
+def is_valid(text):
+    for req in Config.FILTERS:
+        if f"#{req.lower()}" in text.lower():
+            return True
+    return False    
 
 
 def log(text):

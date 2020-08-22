@@ -18,6 +18,7 @@ class Config(object):
     BLACK_LIST = set(int(x) for x in os.environ.get(
         "BLACK_LIST", "").split())
     CHATS = [*os.environ.get("CHATS", "").split(), "@curtanaupdates"]
+    FILTERS = [*os.environ.get("FILTERS", "").split(), "curtana"]
     BLOCKED_UPDATES = os.environ.get("BLOCKED_UPDATES", "").split()
     GLITCH_GIT_URL = os.environ.get("GLITCH_GIT_URL", None)
     GLITCH_APP = GLITCH_GIT_URL.split("/")[-1] # Get app name from git url automatically
