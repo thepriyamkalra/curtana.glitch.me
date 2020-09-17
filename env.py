@@ -1,7 +1,7 @@
 import os
 
 
-class Config(object):
+class ENV(object):
     LOGGER = True
     MAX_MESSAGE_SIZE_LIMIT = 4095  # TG API Limit
     LOAD = []
@@ -19,6 +19,12 @@ class Config(object):
         "BLACK_LIST", "").split())
     CHATS = [*os.environ.get("CHATS", "").split(), "@curtanaupdates"]
     FILTERS = [*os.environ.get("FILTERS", "").split(), "curtana"]
-    BLOCKED_UPDATES = os.environ.get("BLOCKED_UPDATES", "").split()
+    BLOCKED = os.environ.get("BLOCKED", "").split()
     GLITCH_GIT_URL = os.environ.get("GLITCH_GIT_URL", None)
-    GLITCH_APP = GLITCH_GIT_URL.split("/")[-1] # Get app name from git url automatically
+    # Get app name from git url automatically
+    GLITCH_APP = GLITCH_GIT_URL.split("/")[-1]
+
+
+class _ENV(ENV):
+    pass
+    # Add values here to use for development

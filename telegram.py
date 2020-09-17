@@ -10,9 +10,9 @@ from telethon import TelegramClient
 import telethon.utils
 import telethon.events
 from datetime import datetime
-from production import Config
-from util import register, humanbytes, progress, time_formatter
+from util import _events, humanbytes, progress, time_formatter, sync
 import os
+import time
 
 
 class Reverse(list):
@@ -21,21 +21,24 @@ class Reverse(list):
 
 
 class Userbot(TelegramClient):
+
+    sync = sync
+
     def __init__(
             self, session, *, module_path="modules", storage=None,
-            bot_token=None, api_config=None, **kwargs):
+            bot_token=None, enviroment=None, **kwargs):
         self._name = "The-TG-Bot-v3"
-        self.storage = storage or (lambda n: Storage(Path("data") / n))
-        self._logger = logging.getLogger("Userbot")
+        self._logger = logging.getLogger(enviroment.GLITCH_APP)
         self._modules = {}
+        self._on = self.on
         self._module_path = module_path
-        self.config = api_config
+        self.env = enviroment
 
         kwargs = {
             "api_id": 6,
             "api_hash": "eb06d4abfb49dc3eeb1aeb98ae0f581e",
             "device_model": "Website",
-            "app_version": f"@{Config.GLITCH_APP}.glitch.me",
+            "app_version": f"@{self.env.GLITCH_APP}.glitch.me",
             "lang_code": "en",
             **kwargs
         }
@@ -50,8 +53,8 @@ class Userbot(TelegramClient):
         for a_module_path in Path().glob(f"{self._module_path}/*.py"):
             self.load_module_from_file(a_module_path)
 
-        LOAD = self.config.LOAD
-        NO_LOAD = self.config.NO_LOAD
+        LOAD = self.env.LOAD
+        NO_LOAD = self.env.NO_LOAD
         if LOAD or NO_LOAD:
             to_load = LOAD
             if to_load:
@@ -77,13 +80,15 @@ class Userbot(TelegramClient):
         name = f"_UserbotModules.{self._name}.{shortname}"
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
-        mod.register = register
+        mod.events = _events
         mod.client = self
         mod.humanbytes = humanbytes
         mod.progress = progress
         mod.time_formatter = time_formatter
+        mod.build = f"The-TG-Bot-v3{time.strftime('%d%m%Y', time.localtime(os.stat('./').st_mtime))}"
+        mod.me = self.me
         mod.logger = logging.getLogger(shortname)
-        mod.Config = self.config
+        mod.ENV = self.env
         spec.loader.exec_module(mod)
         self._modules[shortname] = mod
         self._logger.info(f"Successfully loaded module {shortname}")
@@ -98,20 +103,3 @@ class Userbot(TelegramClient):
 
         del self._modules[shortname]
         self._logger.info(f"Removed module {shortname}")
-
-    def await_event(self, event_matcher, filter=None):
-        future = asyncio.Future()
-
-        @self.on(event_matcher)
-        async def callback(event):
-            try:
-                if filter is None or await filter(event):
-                    future.set_result(event)
-            except telethon.events.StopPropagation:
-                future.set_result(event)
-                raise
-
-        future.add_done_callback(
-            lambda _: self.remove_event_handler(callback, event_matcher))
-
-        return future

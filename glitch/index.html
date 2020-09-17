@@ -22,9 +22,6 @@
       <span class="red">Priyam Kalra</span>
     </a>
   </h3>
-  <h4>
-    Last updated: {{date}}
-  </h4>
 </center>
 <hr style="background: #181a1b">
 
@@ -38,13 +35,14 @@
       <p></p>
       <ul class="lead">
         {% for char in roms %} {% if char == latest[0] %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}} (latest)</span>
+            <span style="color: white;">{{char}}</span>
+            <span style="color: #ff9966;"> ★</span>
           </a>
         </li>
         {% else %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
             <span style="color: white;">{{char}}</span>
           </a>
@@ -61,13 +59,14 @@
       <p></p>
       <ul class="lead">
         {% for char in kernels %} {% if char == latest[1] %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}} (latest)</span>
+            <span style="color: white;">{{char}}</span>
+            <span style="color: #ff9966;"> ★</span>
           </a>
         </li>
         {% else %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
             <span style="color: white;">{{char}}</span>
           </a>
@@ -84,13 +83,14 @@
       <p></p>
       <ul class="lead">
         {% for char in recoveries %} {% if char == latest[2] %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}} (latest)</span>
+            <span style="color: white;">{{char}}</span>
+            <span style="color: #ff9966;"> ★</span>
           </a>
         </li>
         {% else %}
-        <li style="color: {{random_pastel()}}">
+        <li style="color: {{get_color()}}">
           <a href="https://curtana.glitch.me/{{char}}">
             <span style="color: white;">{{char}}</span>
           </a>
@@ -100,5 +100,8 @@
     </div>
   </div>
 </div>
-
+<br>
+<center>
+  <h4>Last updated: {{date}}</h4>
+</center>
 {%endblock%}
