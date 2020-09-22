@@ -19,6 +19,8 @@ async def main(e):
     date = Date.today().strftime("%B %d, %Y")
     log(date + " -- its update day!", "Updates chat(s): " +
         str(ENV.CHATS), "Event chat: " + f"@{e.sender.username}")
+    if path.exists(CWD):
+        rmtree(CWD)
     gl = Repo.clone_from(ENV.GLITCH_GIT_URL, CWD)
     for chat in ENV.CHATS:
         async for msg in client.iter_messages(chat):
@@ -38,9 +40,7 @@ async def main(e):
         parsed_data[2][1:]), latest=[parsed_data[0][1], parsed_data[1][1], parsed_data[2][1]], count=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], get_color=get_color, choice=choice, date=date)
     log("Update completed.")
     deploy(gl)
-    log("Cleaning up leftover files..")
-    rmtree(CWD)
-    log("Cleaned up all leftover files.", "All jobs executed, idling..")
+    log("All jobs executed, idling..")
 
 
 async def get_media(msg, title):
