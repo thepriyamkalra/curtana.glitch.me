@@ -1,17 +1,19 @@
 # For curtana.glitch.me // curtana.surge.sh // curtana.herokuapp.com
 # By Priyam Kalra
 
-from os import rename, path
 from time import sleep
 from random import choice
 from git import Repo, Actor
+from os import rename, path
 from markdown import markdown
+from requests import get as ping
 from datetime import date as Date
 from shutil import rmtree, copytree
 from jinja2 import Environment, FileSystemLoader
 
 
 CWD = ENV.GLITCH_APP
+DOMAIN = f"{CWD}.glitch.me"
 
 
 async def main(e):
@@ -40,6 +42,10 @@ async def main(e):
         parsed_data[2][1:]), latest=[parsed_data[0][1], parsed_data[1][1], parsed_data[2][1]], count=[parsed_data[0][0], parsed_data[1][0], parsed_data[2][0]], get_color=get_color, choice=choice, date=date)
     log("Update completed.")
     deploy(gl)
+    log(f"Waking up {DOMAIN}..")
+    try: ping(f"http://{DOMAIN}")
+    except: pass
+    log("Done!")
     log("All jobs executed, idling..")
 
 
@@ -47,10 +53,10 @@ async def get_media(msg, title):
     media = await client.download_media(msg, f"{CWD}/{title}/")
     if media.endswith((".png", ".jpg", ".jpeg")):
         logo_path = f"{CWD}/{title}/logo.png"
-        logo = f"<img src='https://curtana.glitch.me/{title}/logo.png' height='255'>"
+        logo = f"<img src='https://{DOMAIN}/{title}/logo.png' height='255'>"
     elif media.endswith((".mp4")):
         logo_path = f"{CWD}/{title}/logo.mp4"
-        logo = f"<video style='border-radius: 10px;' height=255 autoplay loop muted playsinline><source src='https://curtana.glitch.me/{title}/logo.mp4' type='video/mp4'></video>"
+        logo = f"<video style='border-radius: 10px;' height=255 autoplay loop muted playsinline><source src='https://{DOMAIN}/{title}/logo.mp4' type='video/mp4'></video>"
     rename(media, logo_path)
     return logo
 
@@ -139,11 +145,10 @@ def deploy(gl):
     commit = gl.index.commit("Automatic deploy", author=actor, committer=actor)
     push = gl.remote().push()[0]
     if str(commit)[:7] in push.summary:
-        log(f"{CWD}.glitch.me deployed successfully!")
+        log(f"{DOMAIN} deployed successfully!")
     else:
         log("Error while deploying:\n" + push.summary,
             str(commit), str(commit)[:7])
-
 
 def get_color():
     return f"hsl({choice(range(359))}, 100%, 75%)"
