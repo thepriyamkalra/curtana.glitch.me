@@ -3,9 +3,9 @@
 
 <head>
   <script>
-    if (!window.location.toString().includes("https://")) {
-      window.location = "https://curtana.glitch.me" + window.location.pathname
-    }
+  if (location.protocol !== 'https:') {
+      location.replace(`https:${location.href.substring(location.protocol.length)}`);
+  }
   </script>
   <meta name="viewport" content="initial-scale=0.7" />
   <link rel="stylesheet" href="https://curtana.glitch.me/static/style.css" />

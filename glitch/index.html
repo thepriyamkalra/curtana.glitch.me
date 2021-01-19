@@ -5,9 +5,9 @@
 {%block body%}
 
 <center>
-  <img src="https://curtana.glitch.me/static/logo.png" alt="Curtana Updates" height="255"
+  <img src="https://curtana.glitch.me/static/logo.png" alt="Curtana FW" height="255"
     style="border-radius: 10px;" />
-  <p />
+  <p></p>
   <h1>
     <a href="https://justaprudev.github.io/curtana"><span class="red">curtana</span></a><span
       style="color: white;">.</span><a href="https://glitch.me/"><span style="color: hsl(253, 100%, 75%);">glitch<span
@@ -29,70 +29,70 @@
   <div class="container">
     <div>
       <div style="margin-left: 16%;">
-        <span class="red" style="font-size: 135%;">[{{count[0]}}]</span>
+        <span class="red" style="font-size: 135%;">[{{len(roms)}}]</span>
         <h1>ROMs</h1>
       </div>
       <p></p>
+      {% set latest_release = roms[0] %}
+      {{ roms.sort() or '' }}
       <ul class="lead">
-        {% for char in roms %} {% if char == latest[0] %}
-        <li style="color: {{get_color()}}">
-          <a href="https://curtana.glitch.me/{{char}}">
-            <span class="red">{{char}}</span>
-          </a>
-        </li>
+        {% for rom in roms %}
+        <li style="color: {{get_random_color()}}">
+          <a href="https://curtana.glitch.me/{{rom}}">
+        {% if rom == latest_release %}
+            <span class="red">{{rom}}</span>
         {% else %}
-        <li style="color: {{get_color()}}">
-          <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}}</span>
+            <span style="color: white;">{{rom}}</span>
+        {% endif %}
           </a>
         </li>
-        {% endif %} {% endfor %}
+        {% endfor %}
       </ul>
     </div>
     <div style="margin-left: -2%;"></div>
     <div>
       <div style="margin-left: 18%;">
-        <span class="red" style="font-size: 135%;">[{{count[1]}}]</span>
+        <span class="red" style="font-size: 135%;">[{{len(kernels)}}]</span>
         <h1>Kernels</h1>
       </div>
       <p></p>
+      {% set latest_release = kernels[0] %}
+      {{ kernels.sort() or ''}}
       <ul class="lead">
-        {% for char in kernels %} {% if char == latest[1] %}
-      <li style="color: {{get_color()}}">
-          <a href="https://curtana.glitch.me/{{char}}">
-            <span class="red">{{char}}</span>
-          </a>
-        </li>
+        {% for kernel in kernels %}
+        <li style="color: {{get_random_color()}}">
+          <a href="https://curtana.glitch.me/{{kernel}}">
+        {% if kernel == latest_release %}
+            <span class="red">{{kernel}}</span>
         {% else %}
-      <li style="color: {{get_color()}}">
-          <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}}</span>
+            <span style="color: white;">{{kernel}}</span>
+        {% endif %}
           </a>
         </li>
-        {% endif %} {% endfor %}
+        {% endfor %}
       </ul>
     </div>
     <div style="margin-left: 2%;"></div>
     <div>
       <div style="margin-left: 18%;">
-        <span class="red" style="font-size: 135%;">[{{count[2]}}]</span>
+        <span class="red" style="font-size: 135%;">[{{len(recoveries)}}]</span>
         <h1>Recoveries</h1>
       </div>
       <p></p>
+      {% set latest_release = recoveries[0] %}
+      {{ recoveries.sort() or ''}}
       <ul class="lead">
-        {% for char in recoveries %} {% if char == latest[2] %}
-        <li style="color: {{get_color()}}">
-        <a href="https://curtana.glitch.me/{{char}}">
-            <span class="red">{{char}}</span>
-          </a>
-        </li>
+        {% for recovery in recoveries %}
+        <li style="color: {{get_random_color()}}">
+          <a href="https://curtana.glitch.me/{{recovery}}">
+        {% if recovery == latest_release %}
+            <span class="red">{{recovery}}</span>
         {% else %}
-      <li style="color: {{get_color()}}">
-          <a href="https://curtana.glitch.me/{{char}}">
-            <span style="color: white;">{{char}}</span>
+            <span style="color: white;">{{recovery}}</span>
+        {% endif %}
           </a>
         </li>
-        {% endif %} {% endfor %}
+        {% endfor %}
       </ul>
     </div>
   </div>
