@@ -27,7 +27,7 @@ DOMAIN = f"{CWD}.glitch.me"
 DATE = datetime.date.today().strftime("%B %d, %Y")
 
 @polygon.on(incoming=True, func=lambda e: f"@{e.chat.username}" in DATA["chats"] if e.chat else False)
-@polygon.on(pattern="curtana")
+@polygon.on(pattern=NAME)
 async def curtana(e):
     if e.sender.username == polygon.user.username: await e.delete()
     polygon.log(
