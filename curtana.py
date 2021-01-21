@@ -17,7 +17,7 @@ DEFAULT_DATA = {
         "chats": ["@curtanacloud"],
         "item_types": ["rom", "kernel", "recovery", "port", "gsi"],
         "blocked_items": [],
-        "filters": [],
+        "filters": [NAME],
         "git": None
         }
 DATA = polygon.db.get(NAME) or polygon.db.add(name=NAME, value=DEFAULT_DATA) or DEFAULT_DATA
