@@ -1,7 +1,7 @@
 # curtana.glitch.me
 ![LOGO](https://curtana.glitch.me/static/logo.png)
 
+## What is this?
+This is a module pack for the [polygon](https://github.com/justaprudev/polygon) project, which can be loaded using some alpha features.
 ## Credits
-* [Telethon](https://github.com/LonamiWebs/Telethon) (The telegram client)
-* [The-TG-Bot](https://justaprudev.github.io/The-TG-Bot) (Makes using the telegram client easier)
 * [TuxKruger](https://github.com/TuxKruger) and [Maffeen](https://github.com/maffeen) for the amazing logo
