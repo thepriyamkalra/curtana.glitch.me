@@ -1,9 +1,7 @@
-<!-- This is an automatically generated page -->
-
 {%extends "base.html"%}
 {%block title%}Home{%endblock%}
-{%block body%}
 
+{%block body%}
 <center>
   <img src="https://curtana.glitch.me/static/logo.png" alt="Curtana FW" height="255"
     style="border-radius: 10px;" />
@@ -22,8 +20,8 @@
       <span class="red">Priyam Kalra</span>
     </a>
   </h3>
-</center>
-<hr style="background: #181a1b">
+</center> 
+<hr style="background: #181a1b;">
 
 <div class="background-card">
   <div class="container">
@@ -37,8 +35,8 @@
       {{ roms.sort() or '' }}
       <ul class="lead">
         {% for rom in roms %}
-        <li style="color: {{get_random_color()}}">
-          <a href="https://curtana.glitch.me/{{rom}}">
+        <li style="color: {{get_random_color()}};">
+          <a href="https://curtana.glitch.me/rom/{{rom}}">
         {% if rom == latest_release %}
             <span class="red">{{rom}}</span>
         {% else %}
@@ -60,8 +58,8 @@
       {{ kernels.sort() or ''}}
       <ul class="lead">
         {% for kernel in kernels %}
-        <li style="color: {{get_random_color()}}">
-          <a href="https://curtana.glitch.me/{{kernel}}">
+        <li style="color: {{get_random_color()}};">
+          <a href="https://curtana.glitch.me/kernel/{{kernel}}">
         {% if kernel == latest_release %}
             <span class="red">{{kernel}}</span>
         {% else %}
@@ -83,8 +81,8 @@
       {{ recoveries.sort() or ''}}
       <ul class="lead">
         {% for recovery in recoveries %}
-        <li style="color: {{get_random_color()}}">
-          <a href="https://curtana.glitch.me/{{recovery}}">
+        <li style="color: {{get_random_color()}};">
+          <a href="https://curtana.glitch.me/recovery/{{recovery}}">
         {% if recovery == latest_release %}
             <span class="red">{{recovery}}</span>
         {% else %}
