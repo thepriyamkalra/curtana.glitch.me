@@ -21,7 +21,7 @@
     </a>
   </h3>
 </center> 
-<hr style="background: #181a1b">
+<hr style="background: #181a1b;">
 
 <div class="background-card">
   <div class="container">
@@ -35,7 +35,7 @@
       {{ roms.sort() or '' }}
       <ul class="lead">
         {% for rom in roms %}
-        <li style="color: {{get_random_color()}}">
+        <li style="color: {{get_random_color()}};">
           <a href="https://curtana.glitch.me/{{rom}}">
         {% if rom == latest_release %}
             <span class="red">{{rom}}</span>
@@ -58,7 +58,7 @@
       {{ kernels.sort() or ''}}
       <ul class="lead">
         {% for kernel in kernels %}
-        <li style="color: {{get_random_color()}}">
+        <li style="color: {{get_random_color()}};">
           <a href="https://curtana.glitch.me/{{kernel}}">
         {% if kernel == latest_release %}
             <span class="red">{{kernel}}</span>
@@ -81,7 +81,7 @@
       {{ recoveries.sort() or ''}}
       <ul class="lead">
         {% for recovery in recoveries %}
-        <li style="color: {{get_random_color()}}">
+        <li style="color: {{get_random_color()}};">
           <a href="https://curtana.glitch.me/{{recovery}}">
         {% if recovery == latest_release %}
             <span class="red">{{recovery}}</span>
