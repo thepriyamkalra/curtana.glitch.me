@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 
 NAME = Path(__file__).stem
 DEFAULT_DATA = {
-    "chats": ["@updates"],
+    "chats": ["@username"],
     "item_types": ["rom", "kernel", "recovery"],
     "blocked_items": [],
     "filters": [NAME],
@@ -45,8 +45,7 @@ async def glitch(e):
     glitch_repository = clone_from_glitch(DATA["git"])
     titles = {key: [] for key in DATA["item_types"]}
     for i in titles:
-        directory = CWD / i
-        directory.mkdir(exist_ok=True)
+        Path.mkdir(CWD / i, exist_ok=True)
     for chat in DATA["chats"]:
         async for msg in polygon.iter_messages(chat):
             content = msg.message or "#"
@@ -64,7 +63,7 @@ async def glitch(e):
                     str.lower, content_list
                 ):
                     content_list.append(title)
-                    path = CWD / content_type / title
+                    path = CWD / content_type / lower_title
                     path.mkdir(exist_ok=True)
                     banner = await get_banner(msg, path)
                     html_content = html.unparse(content, msg.entities)
@@ -89,7 +88,9 @@ async def glitch(e):
 
 
 async def get_banner(msg, path: Path) -> str:
-    media = Path((await polygon.download_media(msg, path)))
+    # Declared twice for the sake of readability
+    media = await polygon.download_media(msg, path)
+    media = Path(media)
     path /= "banner" + media.suffix
     parents = list(map(lambda i: i.stem, path.parents))
     if media.suffix == ".mp4":
@@ -141,7 +142,7 @@ def clone_from_glitch(git_url) -> Repo:
     try:
         repo.head.reset("HEAD~1", index=True, working_tree=True)
     except GitCommandError:
-        polygon.log("On root commit.")
+        polygon.log("clone: On root commit.")
     for i in Path(GLITCH_FOLDER).glob("*"):
         if i.is_dir():
             shutil.copytree(i, f"{CWD}/{i.stem}", dirs_exist_ok=True)
