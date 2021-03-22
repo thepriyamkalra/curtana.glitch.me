@@ -17,7 +17,7 @@ DEFAULT_DATA = {
     "filters": [NAME],
     "git": None,
 }
-DATA = polygon.db.get(NAME) or polygon.db.add(name=NAME, value=DEFAULT_DATA)
+DATA = db.get(NAME) or db.add(name=NAME, value=DEFAULT_DATA)
 CWD = Path(DATA["git"].split("/")[-1])
 GLITCH_FOLDER = Path(__file__).parent / "glitch"
 DOMAIN = f"{CWD}.glitch.me"
@@ -28,7 +28,7 @@ DATE = datetime.date.today().strftime("%B %d, %Y")
     incoming=True,
     func=lambda e: f"@{e.chat.username}" in DATA["chats"] if e.chat else False,
 )
-@polygon.on(pattern=NAME)
+@polygon.on(command=NAME)
 async def glitch(e):
     if e.sender.username == polygon.user.username:
         await e.delete()
