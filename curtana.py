@@ -28,7 +28,7 @@ DATE = datetime.date.today().strftime("%B %d, %Y")
     incoming=True,
     func=lambda e: f"@{e.chat.username}" in DATA["chats"] if e.chat else False,
 )
-@polygon.on(command=NAME)
+@polygon.on(pattern=NAME)
 async def glitch(e):
     if e.sender.username == polygon.user.username:
         await e.delete()
